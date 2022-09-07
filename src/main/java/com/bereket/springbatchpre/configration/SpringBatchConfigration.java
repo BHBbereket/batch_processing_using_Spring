@@ -2,6 +2,7 @@ package com.bereket.springbatchpre.configration;
 
 import com.bereket.springbatchpre.entity.Student;
 import com.bereket.springbatchpre.repository.StudentRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -20,18 +21,18 @@ import org.springframework.core.io.FileSystemResource;
 
 @Configuration
 @EnableBatchProcessing
-
+@AllArgsConstructor
 public class SpringBatchConfigration {
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
     @Autowired
     private StudentRepo studentRepo;
-
+    @Bean
     public FlatFileItemReader<Student> reader(){
         FlatFileItemReader<Student> itemReader=new FlatFileItemReader<>();
-        itemReader.setResource(new FileSystemResource("src/main/resource/dummy_data.csv"));
-        itemReader.setName("csv_reader");
-        itemReader.setLinesToSkip(1);//the first line has column name so it is not necessary to readit
+        itemReader.setResource(new FileSystemResource("src/main/resources/dummy_data.csv")); // read the date from the file in resource folder
+        itemReader.setName("csvReader");//name the file reader
+        itemReader.setLinesToSkip(1);// we skip the first line of the header
         itemReader.setLineMapper(lineMapper());
         return itemReader;
     }
