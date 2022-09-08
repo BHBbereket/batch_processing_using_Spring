@@ -43,7 +43,7 @@ public class SpringBatchConfigration {
         DelimitedLineTokenizer tokenizer= new DelimitedLineTokenizer();// this tokenizer is used to separate the data in the row of the csv file
         tokenizer.setDelimiter(",");// in csv file the columns inside a row separated by comma so we use comma as a delimiter
         tokenizer.setStrict(false);// this is use not to be strict
-        tokenizer.setNames("id","firstname","lastname","age","gpa");
+        tokenizer.setNames("id","firstname","lastname","dob","gpa");
 
         BeanWrapperFieldSetMapper<Student> fieldSetMapper= new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(Student.class);// this help as to map the csv file columns to map with the fileds of the entity
@@ -73,7 +73,7 @@ public class SpringBatchConfigration {
                 .build();
     }
     @Bean
-    public Job runJob(){
+    public Job job(){
         return jobBuilderFactory.get("importStudents")
                 .flow(step())
                 .end().build();
