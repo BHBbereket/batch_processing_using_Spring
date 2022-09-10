@@ -1,9 +1,7 @@
 package com.bereket.springbatchpre.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -52,7 +50,6 @@ public class Student {
     }
 
     public void setDob(int dob) {
-//        long age=(long) dob;
         LocalDate dateof;
         dateof = LocalDate.of(LocalDate.now().getYear(),1,1).minusYears(dob);
         this.dob = dateof;
