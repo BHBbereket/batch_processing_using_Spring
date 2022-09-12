@@ -1,9 +1,9 @@
-package com.bereket.springbatchpre.service;
+package com.sa.springbatchpre.service;
 
-import com.bereket.springbatchpre.entity.Role;
-import com.bereket.springbatchpre.entity.User;
-import com.bereket.springbatchpre.repository.RoleRepo;
-import com.bereket.springbatchpre.repository.UserRepo;
+import com.sa.springbatchpre.entity.Role;
+import com.sa.springbatchpre.entity.User;
+import com.sa.springbatchpre.repository.RoleRepo;
+import com.sa.springbatchpre.repository.UserRepo;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;

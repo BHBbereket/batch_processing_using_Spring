@@ -1,8 +1,8 @@
-package com.bereket.springbatchpre.repository;
+package com.sa.springbatchpre.repository;
 
 
-import com.bereket.springbatchpre.entity.Role;
-import com.bereket.springbatchpre.entity.User;
+import com.sa.springbatchpre.entity.Role;
+import com.sa.springbatchpre.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

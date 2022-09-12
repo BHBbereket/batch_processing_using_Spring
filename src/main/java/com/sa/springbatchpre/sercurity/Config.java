@@ -1,8 +1,8 @@
-package com.bereket.springbatchpre.sercurity;
+package com.sa.springbatchpre.sercurity;
 
 
-import com.bereket.springbatchpre.sercurity.fillter.CustomAuthenticationFilter;
-import com.bereket.springbatchpre.sercurity.fillter.CustomAuthorizationFilter;
+import com.sa.springbatchpre.sercurity.fillter.CustomAuthenticationFilter;
+import com.sa.springbatchpre.sercurity.fillter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

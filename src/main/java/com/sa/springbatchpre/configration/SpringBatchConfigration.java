@@ -1,15 +1,13 @@
-package com.bereket.springbatchpre.configration;
+package com.sa.springbatchpre.configration;
 
-import com.bereket.springbatchpre.entity.Student;
-import com.bereket.springbatchpre.repository.StudentRepo;
+import com.sa.springbatchpre.entity.Student;
+import com.sa.springbatchpre.repository.StudentRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -22,8 +20,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing

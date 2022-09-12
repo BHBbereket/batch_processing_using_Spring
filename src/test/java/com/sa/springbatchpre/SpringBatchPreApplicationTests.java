@@ -1,4 +1,4 @@
-package com.bereket.springbatchpre;
+package com.sa.springbatchpre;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

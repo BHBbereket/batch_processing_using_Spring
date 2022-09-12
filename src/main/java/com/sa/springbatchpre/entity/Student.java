@@ -1,4 +1,4 @@
-package com.bereket.springbatchpre.entity;
+package com.sa.springbatchpre.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

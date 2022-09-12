@@ -1,6 +1,6 @@
-package com.bereket.springbatchpre.repository;
+package com.sa.springbatchpre.repository;
 
-import com.bereket.springbatchpre.entity.Student;
+import com.sa.springbatchpre.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

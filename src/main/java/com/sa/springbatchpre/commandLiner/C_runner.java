@@ -1,8 +1,8 @@
-package com.bereket.springbatchpre.commandLiner;
+package com.sa.springbatchpre.commandLiner;
 
-import com.bereket.springbatchpre.entity.Role;
-import com.bereket.springbatchpre.entity.User;
-import com.bereket.springbatchpre.service.UserService;
+import com.sa.springbatchpre.entity.Role;
+import com.sa.springbatchpre.entity.User;
+import com.sa.springbatchpre.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

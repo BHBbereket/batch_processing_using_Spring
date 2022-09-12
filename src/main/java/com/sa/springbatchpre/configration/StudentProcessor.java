@@ -1,6 +1,6 @@
-package com.bereket.springbatchpre.configration;
+package com.sa.springbatchpre.configration;
 
-import com.bereket.springbatchpre.entity.Student;
+import com.sa.springbatchpre.entity.Student;
 import org.springframework.batch.item.ItemProcessor;
 
 public class StudentProcessor implements ItemProcessor<Student,Student> {

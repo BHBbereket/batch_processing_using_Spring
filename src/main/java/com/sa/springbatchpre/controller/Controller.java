@@ -1,7 +1,7 @@
-package com.bereket.springbatchpre.controller;
+package com.sa.springbatchpre.controller;
 
-import com.bereket.springbatchpre.entity.User;
-import com.bereket.springbatchpre.service.UserService;
+import com.sa.springbatchpre.entity.User;
+import com.sa.springbatchpre.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

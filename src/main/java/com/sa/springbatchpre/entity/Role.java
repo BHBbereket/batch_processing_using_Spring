@@ -1,4 +1,4 @@
-package com.bereket.springbatchpre.entity;
+package com.sa.springbatchpre.entity;
 
 
 import javax.persistence.*;
