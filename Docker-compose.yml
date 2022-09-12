@@ -1,35 +1,63 @@
-version: "3.8"
-services:
-  mysqldb:
-    image: mysql
-    restart: on-failure
-    env_file: ./.env
-    environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQLDB_DATABASE
-    ports:
-      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-    volumes:
-      - db:/var/lib/mysql
-  app:
-    depends_on:
-      - mysqldb
-    build: .
-    env_file: ./.env
-    ports:
-      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
-    environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false",
-        "spring.datasource.username" : "$MYSQLDB_USER",
-        "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
 
+version: '3.7'
+# Define services
+services:
+
+  postgres:
+    image: 'postgres'
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: bereket # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: root # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB: student_csv # The PostgreSQL default database (automatically created at first launch)
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - postgres1
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+  pgadmin:
+    container_name: pgadmin12
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DEFAULT_SERVER_MODE: "False"
+    volumes:
+      - pgadmin12:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres1
+    restart: unless-stopped
+
+  back-end:
+    # Configuration for building the docker image for the backend service
+    build:
+      #context: . # Use an image built from the specified dockerfile in the `back-end` directory.
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: unless-stopped
+    depends_on:
+      - postgres # This service depends on mysql. Start that first.
+    networks:
+      - postgres1
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/student_csv
+      - SPRING_DATASOURCE_USERNAME=bereket
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - input=classpath:dummy_data.csv
 volumes:
-  db:
+  db-data:
+  pgadmin12:
+
+networks:
+  postgres1:
+    driver: bridge

@@ -1,0 +1,25 @@
+{
+	"info": {
+		"_postman_id": "2f33727f-9ff0-4734-be95-a68faa5b4ea2",
+		"name": "sa_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "migrate_data",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

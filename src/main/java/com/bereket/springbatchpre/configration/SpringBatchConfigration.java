@@ -8,6 +8,8 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -15,9 +17,13 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing
@@ -28,9 +34,11 @@ public class SpringBatchConfigration {
     @Autowired
     private StudentRepo studentRepo;
     @Bean
-    public FlatFileItemReader<Student> reader(){
+    public FlatFileItemReader<Student> reader(@Value("${input}") Resource resource){
         FlatFileItemReader<Student> itemReader=new FlatFileItemReader<>();
-        itemReader.setResource(new FileSystemResource("src/main/resources/dummy_data.csv")); // read the date from the file in resource folder
+        itemReader.setStrict(true);
+        itemReader.setResource(new ClassPathResource("dummy_data.csv")); // read the date from the file in resource folder
+        System.out.println(new ClassPathResource("dummy_data.csv").getDescription());
         itemReader.setName("csvReader");//name the file reader
         itemReader.setLinesToSkip(1);// we skip the first line of the header
         itemReader.setLineMapper(lineMapper());
@@ -67,7 +75,7 @@ public class SpringBatchConfigration {
     @Bean
     public Step step(){
         return stepBuilderFactory.get("csv-step").<Student,Student>chunk(8)
-                .reader(reader())
+                .reader(reader(null))
                 .processor(processor())
                 .writer(writer())
                 .build();
